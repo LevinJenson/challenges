@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      String d = "helloworld";
+      String s = "lol";
+      char[] chars = s.toCharArray();
+      String maxiumLengthString = "";
+      String minimumLengthString = "";
+      List<String> values = new ArrayList();
+
+      for(int i =0;i<d.length();i++){
+        for(int j =i;j<d.length();j++){
+          String value = d.substring(i, j+1);
+          if(containsAll(value, chars)){
+            values.add(value);
+          }
+
+        }
+      }
+      String min = values.get(0);
+
+      for(int k =0;k < values.size();k++){
+
+        if(values.get(k).length() < min.length()){
+          min = values.get(k);
+        }
+
+      }
+
+      System.out.println(min);
+
+
+    }
+
+    public static boolean containsAll(String value, char[] chars) {
+        int[] count = new int[128];
+
+        for (char c : value.toCharArray()) {
+            count[c]++;
+        }
+
+        for (char c : chars) {
+            if (--count[c] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
